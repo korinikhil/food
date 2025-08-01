@@ -1,9 +1,11 @@
+import Navbar from '@/Components/Layout/Nav'
 import './globals.css'
-export default function RootLayout({children}){
-  return(
+export default function RootLayout({ children }) {
+  return (
     <html>
-      <body>
-      {children}
+      <body className='bg-[#2C2C2C]'>
+        <Navbar />
+        {children}
       </body>
     </html>
   )
