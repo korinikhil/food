@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { LuShoppingCart } from "react-icons/lu";
 import { FaSignOutAlt } from "react-icons/fa";
 import Logo from '../../public/Logo.png';
+import Image from "next/image";
+
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -33,8 +35,8 @@ export default function Navbar() {
         {/* Logo section */}
         <div className="flex items-center min-w-[180px]">
           <div className="mr-2 flex-shrink-0">
-            <img
-              src="/logo.png"
+            <Image
+              src={Logo}
               alt="Mumma's Logo"
               className=" w-50 rounded-full object-cover bg-white"
             />
@@ -101,8 +103,8 @@ export default function Navbar() {
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
           <div className="flex items-center">
-            <img
-              src="/logo.png"
+            <Image
+              src={Logo}
               alt="Mumma's Logo"
               className="w-30 rounded-full object-cover bg-white"
             />

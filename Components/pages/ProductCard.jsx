@@ -1,6 +1,8 @@
 import React from "react";
 import { IoStar } from "react-icons/io5";
 import { LuShoppingCart } from "react-icons/lu";
+import Image from "next/image";
+
 
 const ProductCard = ({ image, name, price, desc, tag }) => {
   return (
@@ -14,7 +16,7 @@ const ProductCard = ({ image, name, price, desc, tag }) => {
 
       {/* Floating image */}
       <div className="absolute -top-12 left-1/2 -translate-x-1/2">
-        <img
+        <Image
           src={image}
           alt={name}
           className="w-28 h-28 object-cover rounded-full border-4 border-white shadow-md bg-white group-hover:scale-105 transition"
