@@ -4,6 +4,8 @@ import Image from "next/image";
 import Popular from '@/Components/pages/Popular';
 import Chef from '@/Components/pages/Chef';
 import DinnerReservation from '@/Components/pages/DinnerReservation';
+import Menu from './menu/page';
+import Customersay from '@/Components/pages/Customer';
 // import Chef from '@/public/Companct/Chef';
 
 const Home = () => {
@@ -33,7 +35,9 @@ const Home = () => {
 
     <Popular/>
     <Chef/>
+    <Menu/>
     <DinnerReservation/>
+    <Customersay/>
     </>
   )
 }
