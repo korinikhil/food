@@ -7,7 +7,7 @@ const Chef = () => {
         <>
             <div className=" w-full h-[550px] px-6 py-16 md:px-20 flex flex-col md:flex-row items-center justify-between gap-12">
                 <div className="relative">
-                    <Image src={chef} className="w-full md:w-80 rounded-xl" />
+                    <Image src={chef} className="w-full md:w-80 rounded-xl" alt="CHEF IMG " />
                 </div>
 
                 <div className="text-center md:text-left max-w-xl space-y-6">

@@ -19,8 +19,11 @@ const ProductCard = ({ image, name, price, desc, tag }) => {
         <Image
           src={image}
           alt={name}
-          className="w-28 h-28 object-cover rounded-full border-4 border-white shadow-md bg-white group-hover:scale-105 transition"
+          width={112} // 28 * 4 (rem to px = 112px)
+          height={112}
+          className="object-cover rounded-full border-4 border-white shadow-md bg-white group-hover:scale-105 transition"
         />
+
       </div>
 
       {/* Card Content */}

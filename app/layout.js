@@ -3,9 +3,11 @@ import './globals.css'
 export default function RootLayout({ children }) {
   return (
     <html>
-      <body className='bg-[#2C2C2C]'>
-        <Navbar />
-        {children}
+      <body>
+        <div className="bg-[#2C2C2C] min-h-screen">
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   )
