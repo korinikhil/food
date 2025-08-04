@@ -4,7 +4,7 @@ import React from 'react';
 import ProductCard from './ProductCard';
 
 const Popular = () => {
-    const dalImage = '/Dal.png'; //  Image ko variable me rakha
+    const dalImage = '../../public/dal.png'; //  Image ko variable me rakha
 
     const popularDishes = [
         {
