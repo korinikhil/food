@@ -1,34 +1,46 @@
-// /pages/api/webhooks/clerk.js (ya /app/api/webhooks/clerk/route.js for app dir)
+// /app/api/webhooks/clerk/route.js
 import { NextResponse } from "next/server";
-import { clerkClient, Webhook } from "@clerk/nextjs/server";
+import { clerkClient } from "@clerk/nextjs/server";
+import { Webhook } from "svix";
 
-const signingSecret = process.env.CLERK_WEBHOOK_SIGNING_SECRET;
+// IMPORTANT: Use your Clerk Svix secret (not the API key)
+const svixSecret = process.env.CLERK_WEBHOOK_SIGNING_SECRET;
 
 export async function POST(request) {
-  const body = await request.text();
-  const signature = request.headers.get("x-clerk-signature");
+  // Raw payload needed for signature verification
+  const payload = await request.text();
+  const headers = request.headers;
 
-  let event;
+  // Get signature headers
+  const svixId = headers.get("svix-id");
+  const svixTimestamp = headers.get("svix-timestamp");
+  const svixSignature = headers.get("svix-signature");
 
-  try {
-    event = Webhook.verify(body, signature, signingSecret);
-  } catch (err) {
-    return new NextResponse("Invalid signature", { status: 400 });
+  // Only verify if all headers exist
+  if (!svixId || !svixTimestamp || !svixSignature || !svixSecret) {
+    return NextResponse.json({ error: "Missing Svix headers or secret" }, { status: 400 });
   }
 
-  // Check for user.created event
-  if (event.type === "user.created") {
-    const userId = event.data.id;
-
-    // Update user role to 'user' in public metadata
-    await clerkClient.users.updateUserMetadata(userId, {
-      publicMetadata: {
-        role: "user",
-      },
+  // Webhook signature verification
+  try {
+    const wh = new Webhook(svixSecret);
+    const body = wh.verify(payload, {
+      "svix-id": svixId,
+      "svix-timestamp": svixTimestamp,
+      "svix-signature": svixSignature,
     });
 
-    return new NextResponse("User role set to user", { status: 200 });
-  }
+    // Only handle user.created event
+    if (body.type === "user.created") {
+      const userId = body.data.id;
+      await clerkClient.users.updateUserMetadata(userId, {
+        publicMetadata: { role: "user" }
+      });
+      return NextResponse.json({ message: "User role set to user" });
+    }
 
-  return new NextResponse("Event ignored", { status: 200 });
+    return NextResponse.json({ message: "Event ignored" });
+  } catch (err) {
+    return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
+  }
 }

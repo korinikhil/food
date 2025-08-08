@@ -10,12 +10,13 @@
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^4.13.23",
-    "@clerk/nextjs": "^6.29.0",
+    "@clerk/nextjs": "^6.30.0",
     "lucide-react": "^0.536.0",
     "next": "15.4.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "svix": "^1.71.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
